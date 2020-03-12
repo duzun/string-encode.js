@@ -1,0 +1,70 @@
+{
+  "name": "string-encode",
+  "version": "0.1.0",
+  "description": "Convert different types of JavaScript String to/from Uint8Array",
+  "reveal": true,
+  "publishConfig": {
+    "access": "public"
+  },
+  "module": "string-encode.js",
+  "main": "dist/string-encode.js",
+  "unpkg": "dist/string-encode.min.js",
+  "files": [
+    "string-encode.*",
+    "dist/*",
+    "*.md"
+  ],
+  "scripts": {
+    "build": "rollup -c rollup.config.js",
+    "test": "npx mocha --reporter spec",
+    "coverage": "npx nyc --reporter=lcov --reporter=text-summary npm run test",
+    "jest": "npx jest",
+    "jest:watch": "npx jest --watch",
+    "jest:cov": "npx jest --coverage"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/duzun/string-encode.js.git"
+  },
+  "keywords": [
+    "String",
+    "Multibyte",
+    "UTF8",
+    "Buffer",
+    "Uint8Array",
+    "binary",
+    "hex"
+  ],
+  "author": "Dumitru Uzun <contact@duzun.me> (https://DUzun.Me)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/duzun/string-encode.js/issues"
+  },
+  "homepage": "https://github.com/duzun/string-encode.js#readme",
+  "devDependencies": {
+    "@babel/core": "^7.7.4",
+    "@babel/preset-env": "^7.7.4",
+    "chai": "^4.2.0",
+    "esm": "^3.2.25",
+    "mocha": "^6.2.2",
+    "rollup": "^2.0.6",
+    "rollup-plugin-babel": "^4.4.0",
+    "rollup-plugin-terser": "^5.3.0"
+  },
+  "browserslist": "> 0.25%, not dead",
+  "jshintConfig": {
+    "esversion": 9,
+    "laxbreak": true,
+    "laxcomma": true,
+    "undef": true,
+    "unused": true,
+    "sub": true,
+    "expr": true,
+    "bitwise": false,
+    "eqeqeq": false,
+    "boss": true,
+    "eqnull": true,
+    "scripturl": true,
+    "-W041": false
+  }
+}

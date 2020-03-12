@@ -1,0 +1,28 @@
+language: node_js
+
+node_js:
+- "stable"
+- "13.0"
+- "12.0"
+- "11.0"
+- "10.0"
+
+matrix:
+    fast_finish: true
+    allow_failures:
+        - node_js: '10.0'
+
+sudo: false
+
+cache:
+    directories:
+        - node_modules
+
+before_script:
+    - command -v npx || npm i -g npx
+
+script:
+  - npm run coverage
+
+after_script:
+  - npx codecov
