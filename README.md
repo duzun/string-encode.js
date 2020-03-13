@@ -97,7 +97,7 @@ console.log(buf.toString('base64')); // "QWxvaGEs"
 
 ---
 
-# The theory of `String`s 😉
+# The theory of `String` 😉
 
 A JavaScript [String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String) is a unicode string, which means that it is a [list of unicode characters](https://en.wikipedia.org/wiki/List_of_Unicode_characters), not a list of bytes!
 And it does not map one-to-one to an array of bytes without some encoding either.
@@ -111,15 +111,15 @@ Meanwhile there have been written many libraries to encode, encrypt, hash or oth
 
 Even some browser built-in functions that came before the `TypedArray` standard rely on the `String` type to do their encoding (eg. [btoa](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/btoa) == "binary to ASCII").
 
-## String Types (or encodings)
+## String kinds (or encodings)
 
-Judging by content, there are a few types of JS `String`s used in almost all applications.
+Judging by content, there are a few kinds of JS `String`s used in almost all applications.
 
 ### Binary
 
 Any `String` that do not contain multibyte characters can be considered a **binary** string.
 In other words, each character's code is in the range [0..255].
-These strings can be mapped one-to-one to arrays of bytes, which `Uint8Array` basically is.
+These strings can be mapped one-to-one to arrays of bytes, which `Uint8Array`s basically are.
 
 ```js
 const binStr = 'when © × ® = ?';
@@ -133,26 +133,26 @@ Most old-fashion encoding functions accept only this type of strings (eg. `btoa`
 
 ### Multibyte
 
-The common JS string with unicode characters is a **Multibyte** string,
+In JS the most common string is a **Multibyte** string, with unicode characters,
 which means some (or all) characters require more than a byte of memory.
 
 ```js
 const mbStr = '$ ⚔ ₽ 😄 € ™';
 isBinary(mbStr); // false
 hasMultibyte(mbStr); // '⚔'
-ord(mbStr[0]); // 8381
+ord(mbStr[2]); // 9876
 ```
 
-Most encoding algorithms would not accept this kind of `String`s.
+Most encoding algorithms would not accept a multibyte `String`.
 
 ### ASCII
 
-A subset of binary strings are [**ASCII**](https://www.asciitable.com/) only strings,
+A subset of binary strings is [**ASCII**](https://www.asciitable.com/) only strings,
 which represent the class of strings with character codes in the range [0..127].
 Each ASCII character can be represented with only 7 bits.
 
 ```js
-const asciiStr = 'Any text using the 26 latin letters, digits and punctuation!';
+const asciiStr = 'Any text using the 26 English letters, digits and punctuation!';
 isASCII(asciiStr); // true
 
 isASCII(binStr); // false
@@ -182,7 +182,9 @@ Even though `utf8Str` is still a `String`, it is no longer a multibyte string.
 
 ## String Types Table
 
-|           string          | guessEncoding | hasMultibyte | isBinary | isASCII | isUTF8 | utf8bytes |
+All table headers are functions exported by this library.
+
+|           String          | guessEncoding | hasMultibyte | isBinary | isASCII | isUTF8 | utf8bytes |
 |:-------------------------:|:-------------:|:------------:|:--------:|:-------:|:------:|:---------:|
 |             ""            |     ascii     |     false    |   true   |   true  |  true  |     0     |
 |  "English alphabet is 26" |     ascii     |     false    |   true   |   true  |  true  |     0     |
@@ -198,7 +200,7 @@ Even though `utf8Str` is still a `String`, it is no longer a multibyte string.
 Sometimes you can't tell whether the string has been `utf8Encode`ed
 or it is just a unicode string that by coincidence is also a valid utf8 string.
 
-In the table above `"×©"` could be the original string or could be the encoded string.
+In the table above `"X×©"` could be the original string or could be the encoded string.
 
 **Note 2:**
 
@@ -206,7 +208,9 @@ When slicing utf8 encoded strings, you might cut a multibyte character in half.
 What you get as a result could be considered a valid utf8 string, with async utf8 characters at the edges.
 
 In the table above `"© binary? ×"` is such a slice.
-The `"©"` could be the last but of a utf8 encoded character,
+The `"©"` symbol could be the last byte of a utf8 encoded character,
 and `"×"` - the first of the two bytes of another character.
 
 ---
+
+To be continued...

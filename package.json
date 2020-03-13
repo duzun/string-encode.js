@@ -12,6 +12,7 @@
   "files": [
     "string-encode.*",
     "dist/*",
+    ".babelrc",
     "*.md"
   ],
   "scripts": {
