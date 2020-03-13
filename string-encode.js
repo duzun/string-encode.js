@@ -2,7 +2,7 @@
  * Convert different types of JavaScript String to/from Uint8Array.
  *
  * @author Dumitru Uzun (DUzun.Me)
- * @version 0.1.1
+ * @version 0.1.2
  */
 
 /*requires Uint8Array*/
