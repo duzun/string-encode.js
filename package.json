@@ -42,7 +42,7 @@
   "bugs": {
     "url": "https://github.com/duzun/string-encode.js/issues"
   },
-  "homepage": "https://github.com/duzun/string-encode.js#readme",
+  "homepage": "https://duzun.me/playground/encode#utf8Decode=X%C3%97%C2%A9",
   "devDependencies": {
     "@babel/core": "^7.7.4",
     "@babel/preset-env": "^7.7.4",
