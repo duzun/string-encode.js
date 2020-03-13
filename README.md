@@ -8,6 +8,16 @@ Convert different types of JavaScript String to/from Uint8Array.
 npm i -S string-encode
 ```
 
+Or add it directly to the browser:
+
+```html
+<script src="https://unpkg.com/string-encode"></script>
+<script>
+const { str2buffer, buffer2str /* ... */ } = stringEncode;
+// ...
+</script>
+```
+
 ## Usage
 
 ### str2buffer() and buffer2str()

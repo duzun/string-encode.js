@@ -1,6 +1,6 @@
 {
   "name": "string-encode",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Convert different types of JavaScript String to/from Uint8Array",
   "reveal": true,
   "publishConfig": {
@@ -18,6 +18,7 @@
     "build": "rollup -c rollup.config.js",
     "test": "npx mocha --reporter spec",
     "coverage": "npx nyc --reporter=lcov --reporter=text-summary npm run test",
+    "verup": "npx verup",
     "jest": "npx jest",
     "jest:watch": "npx jest --watch",
     "jest:cov": "npx jest --coverage"
@@ -66,5 +67,13 @@
     "eqnull": true,
     "scripturl": true,
     "-W041": false
+  },
+  "extra": {
+    "verup": {
+      "files": [
+        "string-encode.js",
+        "package-lock.json"
+      ]
+    }
   }
 }

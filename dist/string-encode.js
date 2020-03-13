@@ -4,10 +4,17 @@
     (global = global || self, factory(global.stringEncode = {}));
 }(this, (function (exports) { 'use strict';
 
+    /**
+     * Convert different types of JavaScript String to/from Uint8Array.
+     *
+     * @author Dumitru Uzun (DUzun.Me)
+     * @version 0.1.1
+     */
+
     /*requires Uint8Array*/
 
     /*globals escape, unescape, encodeURI, decodeURIComponent, btoa*/
-    const chr = String.fromCharCode;
+    var chr = String.fromCharCode;
     function ord(chr) {
       return chr.charCodeAt(0);
     }
@@ -16,8 +23,10 @@
       return chr.apply(String, buf);
     }
     function buffer2hex(buf) {
-      const bpe = buf.BYTES_PER_ELEMENT << 1;
-      return buf.reduce((r, c) => r += (c >>> 0).toString(16).padStart(bpe, '0'), '');
+      var bpe = buf.BYTES_PER_ELEMENT << 1;
+      return buf.reduce(function (r, c) {
+        return r += (c >>> 0).toString(16).padStart(bpe, '0');
+      }, '');
     }
     function buffer2str(buf, asUtf8) {
       if (typeof buf == 'string') return buf;
@@ -47,7 +56,7 @@
 
       return new Uint8Array(String(str).split('').map(ord));
     }
-    const nonHexDigitRE = /[^0-9a-f]/g;
+    var nonHexDigitRE = /[^0-9a-f]/g;
     /**
      * Read a hex string into a buffer (Uint8Array), ignoring non-hex chars.
      *
@@ -58,10 +67,10 @@
 
     function hex2buffer(str) {
       str = str.replace(nonHexDigitRE, '');
-      let len = str.length;
-      let ret = new Uint8Array(len + 1 >>> 1);
+      var len = str.length;
+      var ret = new Uint8Array(len + 1 >>> 1);
 
-      for (let i = 0; i < len; i += 2) {
+      for (var i = 0; i < len; i += 2) {
         ret[i >>> 1] = parseInt(str.slice(i, i + 2), 16);
       }
 
@@ -109,13 +118,15 @@
       return new Uint8Array(buf.buffer, buf.byteOffset + start, len);
     }
 
-    let _isLittleEndian;
+    var _isLittleEndian;
 
     function isLittleEndian() {
       if (_isLittleEndian != undefined) return _isLittleEndian;
       _isLittleEndian = !!new Uint8Array(new Uint16Array([1]).buffer)[0];
 
-      isLittleEndian = () => _isLittleEndian;
+      isLittleEndian = function isLittleEndian() {
+        return _isLittleEndian;
+      };
 
       return _isLittleEndian;
     }
@@ -127,7 +138,7 @@
       // if(isASCII(str)) return 'ascii';
       // if(isUTF8(str)) return 'utf8';
 
-      let mbLen = utf8bytes(str);
+      var mbLen = utf8bytes(str);
       if (mbLen) return 'utf8';
       if (mbLen === 0) return 'ascii';
 
@@ -138,11 +149,11 @@
 
       return 'binary';
     }
-    const hasMultibyteRE = /([^\x00-\xFF])/;
-    const isASCIIRE = /^[\x00-\x7F]*$/;
-    const isUTF8RE = /^(?:[\x00-\x7F]|[\xC0-\xDF][\x80-\xBF]|[\xE0-\xEF][\x80-\xBF][\x80-\xBF]|[\xF0-\xF7][\x80-\xBF][\x80-\xBF][\x80-\xBF])*$/;
+    var hasMultibyteRE = /([^\x00-\xFF])/;
+    var isASCIIRE = /^[\x00-\x7F]*$/;
+    var isUTF8RE = /^(?:[\x00-\x7F]|[\xC0-\xDF][\x80-\xBF]|[\xE0-\xEF][\x80-\xBF][\x80-\xBF]|[\xF0-\xF7][\x80-\xBF][\x80-\xBF][\x80-\xBF])*$/;
     function hasMultibyte(str) {
-      let m = hasMultibyteRE.exec(str);
+      var m = hasMultibyteRE.exec(str);
       return m ? m[1] : false;
     }
     function isBinary(str) {
