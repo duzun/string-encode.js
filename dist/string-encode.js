@@ -8,7 +8,7 @@
      * Convert different types of JavaScript String to/from Uint8Array.
      *
      * @author Dumitru Uzun (DUzun.Me)
-     * @version 0.1.2
+     * @version 0.2.0
      */
 
     /*requires Uint8Array*/
@@ -22,6 +22,16 @@
       buf = view8(buf);
       return chr.apply(String, buf);
     }
+    /**
+     * Get the hex representation of a buffer (TypedArray)
+     *
+     * @requires String.prototype.padStart()
+     *
+     * @param   {TypedArray}  buf Uint8Array is desirable, cause it is consistent regardless of the endianness
+     *
+     * @return  {String} The hex representation of the buf
+     */
+
     function buffer2hex(buf) {
       var bpe = buf.BYTES_PER_ELEMENT << 1;
       return buf.reduce(function (r, c) {
@@ -80,6 +90,10 @@
      * This method is a replacement of Buffer.toString(enc)
      * for Browser, where Buffer is not available.
      *
+     * @requires btoa
+     *
+     * @this {Uint8Array}
+     *
      * @param   {String}  enc  'binary' | 'hex' | 'base64' | 'utf8' | undefined
      *
      * @return  {String}
@@ -121,7 +135,7 @@
     var _isLittleEndian;
 
     function isLittleEndian() {
-      if (_isLittleEndian != undefined) return _isLittleEndian;
+      if (_isLittleEndian !== undefined) return _isLittleEndian;
       _isLittleEndian = !!new Uint8Array(new Uint16Array([1]).buffer)[0];
 
       isLittleEndian = function isLittleEndian() {
@@ -135,7 +149,8 @@
     }
     function guessEncoding(str) {
       if (hasMultibyte(str)) return 'mb'; // @todo: test which is faster, utf8bytes() or RegExp
-      // if(isASCII(str)) return 'ascii';
+
+      if (isHEX(str)) return 'hex'; // if(isASCII(str)) return 'ascii';
       // if(isUTF8(str)) return 'utf8';
 
       var mbLen = utf8bytes(str);
@@ -150,6 +165,7 @@
       return 'binary';
     }
     var hasMultibyteRE = /([^\x00-\xFF])/;
+    var isHEXRE = /^[0-9a-f\s]*$/i;
     var isASCIIRE = /^[\x00-\x7F]*$/;
     var isUTF8RE = /^(?:[\x00-\x7F]|[\xC0-\xDF][\x80-\xBF]|[\xE0-\xEF][\x80-\xBF][\x80-\xBF]|[\xF0-\xF7][\x80-\xBF][\x80-\xBF][\x80-\xBF])*$/;
     function hasMultibyte(str) {
@@ -164,6 +180,9 @@
     }
     function isUTF8(str) {
       return isUTF8RE.test(str);
+    }
+    function isHEX(str) {
+      return isHEXRE.test(str);
     }
     function utf8bytes(str, allowAsyncChars) {
       var l = str.length,
@@ -224,6 +243,7 @@
     exports.hex2buffer = hex2buffer;
     exports.isASCII = isASCII;
     exports.isBinary = isBinary;
+    exports.isHEX = isHEX;
     exports.isLittleEndian = isLittleEndian;
     exports.isUTF8 = isUTF8;
     exports.ord = ord;

@@ -10,6 +10,7 @@ Object.assign(global, se);
 /*globals describe, it*/
 describe('binString', () => {
     const emptyStr = '';
+    const hexStr = '00 11 01 ff abcd ef42';
     const asciiStr = 'Any text using the 26 latin letters, digits and punctuation!';
     const binStr = 'when © × ® = ?';
     const mbStr = '$ ⚔ ₽ 😄 € ™';
@@ -158,6 +159,20 @@ describe('binString', () => {
         });
     });
 
+    describe('.isHEX(str)', () => {
+        it(`should return true when the string consists of ASCII characters only`, () => {
+            expect(isHEX(emptyStr)).to.be.true;
+            expect(isHEX(hexStr)).to.be.true;
+
+            expect(isHEX(asciiStr)).to.be.false;
+            expect(isHEX(binStr)).to.be.false;
+            expect(isHEX(mbStr)).to.be.false;
+            expect(isHEX(utf8Str)).to.be.false;
+            expect(isHEX(asyncUtf8Str)).to.be.false;
+            expect(isHEX(mbUtf8Str)).to.be.false;
+        });
+    });
+
     describe('.utf8bytes(str)', () => {
         it(`should return the number of utf8-encoded bytes in the string`, () => {
             expect(utf8bytes(emptyStr)).to.equal(0);
@@ -189,7 +204,7 @@ describe('binString', () => {
     describe('.guessEncoding(str)', () => {
         it(`should return the encoding name of a string (mb|binary|ascii|utf8|~utf8)`, () => {
             [
-                [emptyStr, 'ascii'],
+                [emptyStr, 'hex'],
                 [asciiStr, 'ascii'],
                 [utf8Str, 'utf8'],
                 [mbUtf8Str, 'utf8'],

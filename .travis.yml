@@ -1,4 +1,6 @@
 language: node_js
+os: linux
+dist: trusty
 
 node_js:
 - "stable"
@@ -7,16 +9,15 @@ node_js:
 - "11.0"
 - "10.0"
 
-matrix:
+jobs:
     fast_finish: true
     allow_failures:
         - node_js: '10.0'
 
-sudo: false
-
 cache:
     directories:
         - node_modules
+    timeout: 1440
 
 before_script:
     - command -v npx || npm i -g npx

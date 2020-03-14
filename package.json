@@ -1,6 +1,6 @@
 {
   "name": "string-encode",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "description": "Convert different types of JavaScript String to/from Uint8Array",
   "reveal": true,
   "publishConfig": {
