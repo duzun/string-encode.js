@@ -8,7 +8,7 @@
      * Convert different types of JavaScript String to/from Uint8Array.
      *
      * @author Dumitru Uzun (DUzun.Me)
-     * @version 0.2.0
+     * @version 0.2.1
      */
 
     /*requires Uint8Array*/
@@ -55,6 +55,8 @@
       return buf;
     }
     function str2buffer(str, asUtf8) {
+      str = String(str);
+
       if (asUtf8 == undefined) {
         // Some guessing
         asUtf8 = hasMultibyte(str); // || !isASCII(str)
@@ -62,9 +64,19 @@
 
       if (asUtf8) {
         str = utf8Encode(str);
+      } // Smaller x2
+      // return new Uint8Array(String(str).split('').map(ord));
+      // Faster x3-4
+
+
+      var len = str.length;
+      var buf = new Uint8Array(len);
+
+      while (len--) {
+        buf[len] = str.charCodeAt(len);
       }
 
-      return new Uint8Array(String(str).split('').map(ord));
+      return buf;
     }
     var nonHexDigitRE = /[^0-9a-f]/g;
     /**
