@@ -58,7 +58,7 @@ Simple `sha1` function using `crypto` for Browser, that works with `String` and 
 ```js
 import { str2buffer, toString } from 'string-encode';
 
-const crypto = scope.crypto || scope.msCrypto;
+const crypto = window.crypto || window.msCrypto || window.webkitCrypto;
 const subtle = crypto.subtle || crypto.webkitSubtle;
 
 async function sha1(str, enc='hex') {
