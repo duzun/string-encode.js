@@ -8,7 +8,7 @@ Object.assign(global, se);
 /*globals hasMultibyte, isBinary, isASCII, isUTF8, utf8bytes, guessEncoding, utf8Encode*/
 
 /*globals describe, it*/
-describe('binString', () => {
+describe('stringEncode', () => {
     const emptyStr = '';
     const hexStr = '00 11 01 ff abcd ef42';
     const asciiStr = 'Any text using the 26 latin letters, digits and punctuation!';
