@@ -1,14 +1,14 @@
 (function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
     typeof define === 'function' && define.amd ? define(['exports'], factory) :
-    (global = global || self, factory(global.stringEncode = {}));
+    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory(global.stringEncode = {}));
 }(this, (function (exports) { 'use strict';
 
     /**
      * Convert different types of JavaScript String to/from Uint8Array.
      *
      * @author Dumitru Uzun (DUzun.Me)
-     * @version 0.2.1
+     * @version 0.2.2
      */
 
     /*requires Uint8Array*/
