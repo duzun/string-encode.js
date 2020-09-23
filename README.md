@@ -163,8 +163,9 @@ Most old-fashion encoding functions accept only this type of strings (eg. `btoa`
 
 ### Multibyte
 
-In JS the most common string is a **Multibyte** string, with unicode characters,
-which means some (or all) characters require more than a byte of memory.
+In JS the most common string is a **Multibyte** string,
+one that contains unicode characters,
+which require more than a byte of memory.
 
 ```js
 const mbStr = '$ ⚔ ₽ 😄 € ™';
@@ -196,6 +197,8 @@ The important feature of UTF8 is that it is fully compatible with ASCII strings,
 which means any ASCII string is also a valid UTF8 encoded string.
 Unless you need symbols outside the ASCII table, this encoding is very compact,
 and uses more than a byte per character only where needed.
+
+In fact, [UTF8 should be the default choice of encoding](https://utf8everywhere.org/) you use in a program.
 
 ```js
 const mbStr = '$ ⚔ ₽ 😄 € ™';
@@ -264,3 +267,10 @@ and `"×"` - the first of the two bytes of another character.
 ---
 
 To be continued...
+
+---
+
+Further reading:
+
+- [The Absolute Minimum Every Software Developer Absolutely, Positively Must Know About Unicode and Character Sets (No Excuses!)](https://www.joelonsoftware.com/2003/10/08/the-absolute-minimum-every-software-developer-absolutely-positively-must-know-about-unicode-and-character-sets-no-excuses/).
+- [UTF-8 Everywhere](https://utf8everywhere.org/)
