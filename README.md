@@ -1,4 +1,4 @@
-# string-encode [![Build Status](https://travis-ci.org/duzun/string-encode.js.svg?branch=master)](https://travis-ci.org/duzun/string-encode.js) [![codecov](https://codecov.io/gh/duzun/string-encode.js/branch/master/graph/badge.svg)](https://codecov.io/gh/duzun/string-encode.js)
+# string-encode [![Build Status](https://travis-ci.com/duzun/string-encode.js.svg?branch=master)](https://travis-ci.com/duzun/string-encode.js) [![codecov](https://codecov.io/gh/duzun/string-encode.js/branch/master/graph/badge.svg)](https://codecov.io/gh/duzun/string-encode.js)
 
 - Convert different types of JavaScript `String` to/from `Uint8Array`.
 - Check for [`String` encoding](#string-types-table).
