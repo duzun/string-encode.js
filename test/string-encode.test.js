@@ -1,11 +1,13 @@
-const esm = require('esm')(module);
-const { expect } = require('chai');
-const se = esm('../string-encode');
+// const esm = require('esm')(module);
+// const se = esm('../string-encode');
+const se = require('../dist/string-encode.js');
 
 // Export functions to the global scope for simplicity
-Object.assign(global, se);
+Object.assign(typeof global == 'undefined' ? window : global, se);
 /*globals str2buffer, buffer2str, hex2buffer, buffer2hex, toString*/
 /*globals hasMultibyte, isBinary, isASCII, isUTF8, utf8bytes, guessEncoding, utf8Encode*/
+
+const { expect } = require('chai');
 
 /*globals describe, it*/
 describe('stringEncode', () => {
